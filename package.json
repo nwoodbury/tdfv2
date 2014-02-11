@@ -1,0 +1,27 @@
+{
+    "name": "TDF",
+    "description": "Tour de Finance - a research-oriented paper-trading competition on the stock market",
+    "version": "2.0.01",
+    "private": false,
+    "author": "BYU IDeA Labs",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nwoodbury/tdfv2"
+    },
+    "engines": {
+        "node": "0.10.x",
+        "npm": "1.2.x"
+    },
+    "scripts": {
+
+    },
+    "dependencies": {
+        "express": "3.x",
+        "grunt": "~0.4.x",
+        "grunt-cli": "~0.1.9",
+        "bower": "~1.2.7"
+    },
+    "devDependencies": {
+
+    }
+}
