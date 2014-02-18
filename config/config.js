@@ -1,3 +1,5 @@
+'use strict';
+
 // Utilize Lo-Dash utility library
 var _ = require('lodash');
 

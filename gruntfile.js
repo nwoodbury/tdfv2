@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
     // Project Configuration
 
@@ -28,17 +30,6 @@ module.exports = function(grunt) {
             all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js',
                   'app/**/*.js']
         },
-        bower: {
-            install: {
-                options: {
-                    targetDir: './public/lib',
-                    layout: 'byComponent',
-                    install: true,
-                    verbose: true,
-                    cleanBowerDir: true
-                }
-            }
-        },
         nodemon: {
             dev: {
                 script: 'server.js',
@@ -66,7 +57,6 @@ module.exports = function(grunt) {
     // Load NPM Tasks
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
 
@@ -75,7 +65,4 @@ module.exports = function(grunt) {
 
     //Default task(s).
     grunt.registerTask('default', ['jshint', 'concurrent']);
-
-    // Bower Task
-    grunt.registerTask('install', ['bower']);
 };
