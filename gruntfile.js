@@ -4,12 +4,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
-            jade: {
-                files: ['app/views/**'],
-                options: {
-                    livereload: true,
-                },
-            },
             js: {
                 files: ['public/js/**', 'app/**/*.js'],
                 tasks: ['jshint'],
@@ -44,6 +38,28 @@ module.exports = function(grunt) {
                     cleanBowerDir: true
                 }
             }
+        },
+        nodemon: {
+            dev: {
+                script: 'server.js',
+                options: {
+                    args: [],
+                    ignore: ['public/**'],
+                    ext: 'js',
+                    nodeArgs: ['--debug'],
+                    delayTime: 1,
+                    env: {
+                        PORT: 3000
+                    },
+                    cwd: __dirname
+                }
+            }
+        },
+        concurrent: {
+            tasks: ['nodemon', 'watch'],
+            options: {
+                logConcurrentOutput: true
+            }
         }
     });
 
@@ -51,9 +67,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-nodemon');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     //Making grunt default to force in order not to break the project.
     grunt.option('force', true);
+
+    //Default task(s).
+    grunt.registerTask('default', ['jshint', 'concurrent']);
 
     // Bower Task
     grunt.registerTask('install', ['bower']);
