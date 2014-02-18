@@ -11,7 +11,7 @@
         "angular-ui-utils": "~0.0.4",
         "json3": "~3.2.4",
         "jquery": "~2.1.0",
-        "lowdash": "~2.4.1",
+        "lodash": "~2.4.1",
         "flot": "~0.8.2"
     }
 }
