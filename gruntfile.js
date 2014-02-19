@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function(grunt) {
     // Project Configuration
 
@@ -7,7 +5,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         watch: {
             js: {
-                files: ['public/js/**', 'app/**/*.js'],
+                files: ['public/js/**', 'app/**/*.js','config/**/*.js'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true,
@@ -28,7 +26,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js',
-                  'app/**/*.js']
+                  'app/**/*.js', 'config/**/*.js', 'server.js']
         },
         nodemon: {
             dev: {
