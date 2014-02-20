@@ -31,7 +31,8 @@
         "beforeEach",
         "after",
         "afterEach",
-        "it"
+        "it",
+        "should"
     ],
     "indent": 4, // Specify indentation spacing
     "maxlen": 80, // Max line lenght
