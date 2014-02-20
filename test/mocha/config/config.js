@@ -6,13 +6,14 @@ describe('<Unit Test>', function() {
         var config;
 
         beforeEach(function(done) {
-            config = require('../../../config/config.js')('development');
+            config = require('../../../config/config.js')('development', 2345);
             done();
         });
 
         it('should load the common configurations', function(next) {
-            config.should.have.property(['root', 'port', 'templateEngine',
+            config.should.have.property(['root', 'templateEngine',
                                          'sessionSecret']);
+            config.should.have.property('port', 2345);
             next();
         });
 
@@ -30,13 +31,14 @@ describe('<Unit Test>', function() {
         var config;
 
         beforeEach(function(done) {
-            config = require('../../../config/config.js')('test');
+            config = require('../../../config/config.js')('test', 4000);
             done();
         });
 
         it('should load the common configurations', function(next) {
-            config.should.have.property(['root', 'port', 'templateEngine',
+            config.should.have.property(['root', 'templateEngine',
                                          'sessionSecret']);
+            config.should.have.property('port', 4000);
             next();
         });
 
@@ -54,13 +56,14 @@ describe('<Unit Test>', function() {
         var config;
 
         beforeEach(function(done) {
-            config = require('../../../config/config.js')('production');
+            config = require('../../../config/config.js')('production', 6000);
             done();
         });
 
         it('should load the common configurations', function(next) {
-            config.should.have.property(['root', 'port', 'templateEngine',
+            config.should.have.property(['root', 'templateEngine',
                                          'sessionSecret']);
+            config.should.have.property('port', 6000);
             next();
         });
 

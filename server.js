@@ -10,11 +10,15 @@ require('colors');
 //  Main Application Entry (order is important)
 //=============================================================================
 
-// Load Configurations
+// Load Configurations (set default variables if not passed in the process)
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+console.log(process.env.PORT);
+process.env.PORT = process.env.PORT || 3000;
+console.log(process.env.PORT);
 
 // Initializing system variables
-var config = require('./config/config')(process.env.NODE_ENV);
+var config = require('./config/config')(process.env.NODE_ENV,
+                                        process.env.PORT);
 
 module.exports.start = function(done) {
     var app = express();

@@ -1,13 +1,15 @@
 var path = require('path');
 var rootPath = path.normalize(__dirname + '/../..');
 
-module.exports = {
-    root: rootPath,
-    port: process.env.PORT || 3000,
-    //db: process.env.MONGOHQ_URL,
-    templateEngine: 'swig',
+module.exports = function(port) {
+    return {
+        root: rootPath,
+        port: port,
+        //db: process.env.MONGOHQ_URL,
+        templateEngine: 'swig',
 
-    // The secret should be set to a non-guessable string that is used to
-    // compute a session hash
-    sessionSecret: 'harrymarkowitz'
+        // The secret should be set to a non-guessable string that is used to
+        // compute a session hash
+        sessionSecret: 'harrymarkowitz'
+    };
 };
