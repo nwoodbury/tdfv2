@@ -22,19 +22,17 @@ Install grunt, the grunt client, and bower globally by:
 
     sudo npm install -g grunt grunt-cli bower
 
-### Step 3: Install and Start RethinkDB
+### Step 3: Install Project Dependencies
 
-Follow the instructions [here](http://www.rethinkdb.com/docs/install/ubuntu/)
-to install RethinkDB.
-In short:
+Enter the tdf directory and install the project dependencies with
 
-    sudo add-apt-repository ppa:rethinkdb/ppa   && \
-    sudo apt-get update                         && \
-    sudo apt-get install rethinkdb
+    npm install
 
-Then start the database with
+Note: you should never have to use `sudo npm install` to install the
+dependencies.
 
-    rethinkdb
+## Testing TDF
 
-You can now point your browser to [localhost:8080](http://localhost:8080)
-to see the RethinkDB administrative UI.
+You can run the unit tests for TDF with
+
+    grunt test
