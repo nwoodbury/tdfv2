@@ -1,13 +1,32 @@
+/* jshint expr:true */
+
+var Q = require('q');
 require('should');
 
 describe('<Unit Test>', function() {
     describe('Development Configuration', function() {
 
         var config;
+        var failed;
 
         beforeEach(function(done) {
-            config = require('../../../config/config.js')('development', 2345);
-            done();
+            Q.nfcall(require('../../../config/config.js'),
+                     'development', 2345).
+            then(function(r_config) {
+                config = r_config;
+                failed = false;
+            }).
+            fail(function() {
+                failed = true;
+            }).
+            fin(function() {
+                done();
+            });
+        });
+
+        it('should not fail to load', function(next) {
+            failed.should.not.be.ok;
+            next();
         });
 
         it('should load the common configurations', function(next) {
@@ -29,10 +48,26 @@ describe('<Unit Test>', function() {
     describe('Test Configuration', function() {
 
         var config;
+        var failed;
 
         beforeEach(function(done) {
-            config = require('../../../config/config.js')('test', 4000);
-            done();
+            Q.nfcall(require('../../../config/config.js'),
+                     'test', 4000).
+            then(function(r_config) {
+                config = r_config;
+                failed = false;
+            }).
+            fail(function() {
+                failed = true;
+            }).
+            fin(function() {
+                done();
+            });
+        });
+
+        it('should not fail to load', function(next) {
+            failed.should.not.be.ok;
+            next();
         });
 
         it('should load the common configurations', function(next) {
@@ -54,10 +89,26 @@ describe('<Unit Test>', function() {
     describe('Production Configuration', function() {
 
         var config;
+        var failed;
 
         beforeEach(function(done) {
-            config = require('../../../config/config.js')('production', 6000);
-            done();
+            Q.nfcall(require('../../../config/config.js'),
+                     'production', 6000).
+            then(function(r_config) {
+                config = r_config;
+                failed = false;
+            }).
+            fail(function() {
+                failed = true;
+            }).
+            fin(function() {
+                done();
+            });
+        });
+
+        it('should not fail to load', function(next) {
+            failed.should.not.be.ok;
+            next();
         });
 
         it('should load the common configurations', function(next) {
@@ -72,6 +123,29 @@ describe('<Unit Test>', function() {
             config.should.have.property('mode', 'production');
             config.should.have.property('app');
             config.app.should.have.property('name');
+            next();
+        });
+    });
+
+    describe('Undefined Configuration', function() {
+        var failed;
+
+        beforeEach(function(done) {
+            Q.nfcall(require('../../../config/config.js'),
+                     'bogus', 6000).
+            then(function() {
+                failed = false;
+            }).
+            fail(function() {
+                failed = true;
+            }).
+            fin(function() {
+                done();
+            });
+        });
+
+        it('should not fail to load', function(next) {
+            failed.should.be.ok;
             next();
         });
     });
