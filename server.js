@@ -2,7 +2,8 @@
 //  Module Dependencies
 //=============================================================================
 
-var express = require('express');
+var express = require('express'),
+    Q = require('q');
 
 require('colors');
 
@@ -12,32 +13,38 @@ require('colors');
 
 // Load Configurations (set default variables if not passed in the process)
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-console.log(process.env.PORT);
 process.env.PORT = process.env.PORT || 3000;
-console.log(process.env.PORT);
 
-// Initializing system variables
-var config = require('./config/config')(process.env.NODE_ENV,
-                                        process.env.PORT);
-
-module.exports.start = function(done) {
+// Start up the app
+Q.nfcall(require('./config/config'), process.env.NODE_ENV, process.env.PORT)
+.then(function(config) {
     var app = express();
+    var deferred = Q.defer();
+
+    console.log(('\n\n[tdf] Starting app...').cyan);
 
     app.listen(config.port, function() {
-        console.log(('App started, listening on port ' +
-                     config.port).green);
-
-        if (done) {
-            return done(null, app);
-        }
-    }).on('error', function(e) {
-        if (e.code === 'EADDRINUSE') {
-            console.log('Address in use. Is the server already running?'.red);
-        }
-        if (done) {
-            return done(e);
-        }
+        deferred.resolve(config.port);
+    }).on('error', function(err) {
+        deferred.reject(err);
     });
-};
 
-module.exports.start();
+    return deferred.promise;
+})
+.then(function(port) {
+    console.log(('[tdf] App successfully started; listening on port ' +
+                 port).green);
+})
+.fail(function(err) {
+    if (err.code === 'EADDRINUSE') {
+        console.log('[tdf] Address in use. Is the server already running?'
+                    .red);
+    }
+    else {
+        console.log('[tdf] Unknown Error:'.red);
+        console.log(err.stack);
+    }
+})
+.fin(function() {
+    console.log('[tdf] App is running\n\n'.green);
+});
