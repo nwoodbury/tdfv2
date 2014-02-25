@@ -34,7 +34,15 @@ module.exports = function(app, config/*, passport, db*/) {
 
     // Only use logger for development environment
     if (process.env.NODE_ENV === 'development') {
-        app.use(express.logger('dev'));
+        app.use(function (req, res, next) {
+            if (!(/(\.(png|jpg|gif|jpeg)$)/i).test(req.path) &&
+                !(/(\/lib\/|\/js\/|\/css\/|header.html)/i).test(req.path)) {
+                express.logger('dev')(req, res, next);
+            }
+            else {
+                next();
+            }
+        });
     }
 
     // assign the template engine to .html files
