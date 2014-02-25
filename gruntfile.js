@@ -5,15 +5,14 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         watch: {
             js: {
-                files: ['public/js/**', 'app/**/*.js', 'app/views/**',
-                        'config/**/*.js'],
+                files: ['public/js/**', 'app/**/*.js', 'config/**/*.js'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true,
                 },
             },
             html: {
-                files: ['public/views/**'],
+                files: ['public/views/**', 'app/views/**'],
                 options: {
                     livereload: true,
                 },
@@ -35,7 +34,7 @@ module.exports = function(grunt) {
                 options: {
                     args: [],
                     ignore: ['public/**'],
-                    ext: 'js',
+                    ext: 'js,html',
                     nodeArgs: ['--debug'],
                     delayTime: 1,
                     cwd: __dirname

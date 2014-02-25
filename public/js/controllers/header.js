@@ -14,6 +14,7 @@ angular.module('tdf.system').controller('HeaderController',
                 $scope.menu = $scope.getPrivateMenu();
             }
         };
+        //
 
         $scope.getPublicMenu = function() {
             return [
