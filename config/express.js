@@ -11,7 +11,7 @@ var express = require('express'),
 //  Express Settings Configuration
 //=============================================================================
 
-module.exports = function(app, config/*, passport, db*/) {
+module.exports = function(app, config, passport/*, db*/) {
     app.set('showStackError', true);
 
     // Prettify HTML
@@ -79,8 +79,8 @@ module.exports = function(app, config/*, passport, db*/) {
         app.use(helpers(config.app.name));
 
         // Use passport session
-        /*app.use(passport.initialize());
-        app.use(passport.session());*/
+        app.use(passport.initialize());
+        app.use(passport.session());
 
         // Connect flash for flash messages
         app.use(flash());
