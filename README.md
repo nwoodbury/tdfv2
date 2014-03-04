@@ -36,3 +36,7 @@ dependencies.
 You can run the unit tests for TDF with
 
     grunt test
+
+## Credits
+
+Built on the [MEAN stack](http://www.mean.io)
